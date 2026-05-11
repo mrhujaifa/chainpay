@@ -1,0 +1,5 @@
+git commit -m "feat: add firebase auth middleware"
+git commit -m "fix: token revoke on logout"
+git commit -m "chore: update prisma schema"
+git commit -m "refactor: move business logic to service layer"
+git commit -m "docs: add README setup guide"

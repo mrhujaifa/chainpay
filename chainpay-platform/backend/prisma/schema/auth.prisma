@@ -1,0 +1,55 @@
+enum Role {
+    USER
+    ADMIN
+    MODERATOR
+}
+
+enum AuthProvider {
+    GOOGLE
+    EMAIL
+    GITHUB
+    FACEBOOK
+}
+
+model User {
+    id          String  @id @default(cuid())
+    firebaseUid String  @unique @map("firebase_uid")
+    email       String  @unique
+    name        String?
+    avatar      String?
+
+    role Role @default(USER)
+
+    provider AuthProvider @default(GOOGLE)
+
+    isActive   Boolean @default(true)
+    isVerified Boolean @default(false)
+
+    lastLoginAt DateTime?
+
+    deletedAt DateTime?
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    profile Profile?
+
+    @@map("users")
+}
+
+model Profile {
+    id          String    @id @default(cuid())
+    bio         String?
+    phoneNumber String?   @map("phone_number")
+    address     String?
+    dateOfBirth DateTime? @map("date_of_birth")
+
+    // Relation
+    userId String @unique @map("user_id")
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("profiles")
+}

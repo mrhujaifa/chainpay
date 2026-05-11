@@ -1,0 +1,14 @@
+model Wallet {
+    id             Int      @id @default(autoincrement())
+    userId         Int?
+    circleWalletId String   @unique
+    walletSetId    String?
+    address        String   @unique
+    blockchain     String
+    custodyType    String
+    accountType    String?
+    state          String
+    metadata       Json?
+    createdAt      DateTime
+    updatedAt      DateTime
+}
