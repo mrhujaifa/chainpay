@@ -33,6 +33,7 @@ model User {
     updatedAt DateTime @updatedAt @map("updated_at")
 
     profile Profile?
+    wallets Wallet[]
 
     @@map("users")
 }

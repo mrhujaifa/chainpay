@@ -21,4 +21,10 @@ export const config = {
   database: {
     url: getEnv("DATABASE_URL"),
   },
+
+  circle: {
+    apiKey: getEnv("CIRCLE_API_KEY"),
+    environment: getEnv("CIRCLE_ENVIRONMENT", "sandbox"),
+    entitySecret: getEnv("ENTITY_SECRET"),
+  },
 };

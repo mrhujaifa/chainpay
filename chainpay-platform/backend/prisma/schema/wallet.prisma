@@ -1,14 +1,23 @@
 model Wallet {
-    id             Int      @id @default(autoincrement())
-    userId         Int?
-    circleWalletId String   @unique
-    walletSetId    String?
-    address        String   @unique
-    blockchain     String
-    custodyType    String
-    accountType    String?
-    state          String
-    metadata       Json?
-    createdAt      DateTime
-    updatedAt      DateTime
+    id             String     @id @default(cuid())
+    circleWalletId String     @unique @map("circle_wallet_id")
+    address        String     @unique
+    blockchain     String // e.g. "MATIC-AMOY", "ETH-SEPOLIA"
+    walletSetId    String     @map("wallet_set_id")
+    state          String     @default("LIVE") // LIVE, FROZEN
+    walletType     WalletType @default(DEV_CONTROLLED)
+
+    // Relation
+    userId String @map("user_id")
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("wallets")
+}
+
+enum WalletType {
+    DEV_CONTROLLED
+    USER_CONTROLLED
 }

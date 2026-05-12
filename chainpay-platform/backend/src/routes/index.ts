@@ -8,6 +8,6 @@ const router = Router();
 router.use("/auth", AuthRoutes);
 
 // wallet route
-router.use("/wallet", WalletRoutes);
+router.use("/wallets", WalletRoutes);
 
 export const IndexRoutes: Router = router;

@@ -26,3 +26,11 @@ export const AuthProvider = {
 } as const
 
 export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
+
+
+export const WalletType = {
+  DEV_CONTROLLED: 'DEV_CONTROLLED',
+  USER_CONTROLLED: 'USER_CONTROLLED'
+} as const
+
+export type WalletType = (typeof WalletType)[keyof typeof WalletType]

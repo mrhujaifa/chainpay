@@ -4,7 +4,7 @@ interface IResponseData<T> {
   httpStatusCode: number;
   success: boolean;
   message: string;
-  data?: T | undefined;
+  data?: T;
   meta?: {
     page: number;
     limit: number;

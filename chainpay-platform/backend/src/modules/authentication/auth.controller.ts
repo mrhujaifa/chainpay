@@ -1,48 +1,35 @@
-import { Response } from "express";
+import status from "http-status";
 import { asyncHandler } from "../../utils/asyncHandler";
-import { AuthRequest } from "../../middleware/verifyToken";
-import * as AuthService from "./auth.service";
 import { sendResponse } from "../../utils/response.util";
+import { AuthServices } from "./auth.service";
 
-// ✅ Sign Up / Sign In — same endpoint
-export const loginOrRegister = asyncHandler(
-  async (req: AuthRequest, res: Response) => {
-    const user = await AuthService.findOrCreateUser(req.user!);
-    const isNew = user.isNew;
+const signUpWithEmail = asyncHandler(async (req, res) => {
+  const payload = req.body;
 
-    sendResponse(
-      res,
-      isNew ? 201 : 200,
-      isNew ? "Account created successfully" : "Login successful",
-      user.data,
-    );
-  },
-);
+  const result = await AuthServices.signUpWithEmail(payload);
 
-// ✅ Get current user profile
-export const getMe = asyncHandler(async (req: AuthRequest, res: Response) => {
-  const user = await AuthService.getUserById(req.user!.uid);
-  sendResponse(res, 200, "Profile fetched successfully", user);
+  sendResponse(res, {
+    httpStatusCode: status.CREATED,
+    success: true,
+    message: "Account created successfully",
+    data: result,
+  });
 });
 
-// ✅ Update profile
-export const updateProfile = asyncHandler(
-  async (req: AuthRequest, res: Response) => {
-    const user = await AuthService.updateUserProfile(req.user!.uid, req.body);
-    sendResponse(res, 200, "Profile updated successfully", user);
-  },
-);
+const signInWithEmail = asyncHandler(async (req, res) => {
+  const payload = req.body;
 
-// ✅ Logout — Backend এ token revoke করো
-export const logout = asyncHandler(async (req: AuthRequest, res: Response) => {
-  await AuthService.revokeToken(req.user!.uid);
-  sendResponse(res, 200, "Logged out successfully");
+  const result = await AuthServices.signInWithEmail(payload);
+
+  sendResponse(res, {
+    httpStatusCode: status.OK,
+    success: true,
+    message: "Login successful",
+    data: result,
+  });
 });
 
-// ✅ Delete account
-export const deleteAccount = asyncHandler(
-  async (req: AuthRequest, res: Response) => {
-    await AuthService.softDeleteUser(req.user!.uid);
-    sendResponse(res, 200, "Account deleted successfully");
-  },
-);
+export const AuthControllers = {
+  signUpWithEmail,
+  signInWithEmail,
+};

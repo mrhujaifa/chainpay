@@ -15,7 +15,7 @@ export const verifyAuth = (...roles: Role[]) => {
     try {
       const authHeader = req.headers.authorization;
 
-      if (!authHeader || !authHeader.startsWith(`Bearear `)) {
+      if (!authHeader || !authHeader.startsWith(`Bearer `)) {
         throw new AppError(
           "Unauthorized: No token provided",
           status.UNAUTHORIZED,
