@@ -28,6 +28,11 @@ export type User = Prisma.UserModel
  */
 export type Profile = Prisma.ProfileModel
 /**
+ * Model Transaction
+ * 
+ */
+export type Transaction = Prisma.TransactionModel
+/**
  * Model Wallet
  * 
  */

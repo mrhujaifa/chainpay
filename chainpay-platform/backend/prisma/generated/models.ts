@@ -10,5 +10,6 @@
  */
 export type * from './models/User'
 export type * from './models/Profile'
+export type * from './models/Transaction'
 export type * from './models/Wallet'
 export type * from './commonInputTypes'

@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Profile: 'Profile',
+  Transaction: 'Transaction',
   Wallet: 'Wallet'
 } as const
 
@@ -103,6 +104,26 @@ export const ProfileScalarFieldEnum = {
 } as const
 
 export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
+
+
+export const TransactionScalarFieldEnum = {
+  id: 'id',
+  circleTransferId: 'circleTransferId',
+  txHash: 'txHash',
+  amount: 'amount',
+  tokenSymbol: 'tokenSymbol',
+  blockchain: 'blockchain',
+  status: 'status',
+  type: 'type',
+  fromAddress: 'fromAddress',
+  fromWalletId: 'fromWalletId',
+  toAddress: 'toAddress',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
 
 
 export const WalletScalarFieldEnum = {

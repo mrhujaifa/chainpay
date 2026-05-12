@@ -1,0 +1,40 @@
+model Transaction {
+    id               String  @id @default(cuid())
+    circleTransferId String? @unique @map("circle_transfer_id")
+    txHash           String? @map("tx_hash")
+
+    amount      String
+    tokenSymbol String @map("token_symbol")
+    blockchain  String
+
+    status TransactionStatus @default(PENDING)
+    type   TransactionType
+
+    // Sender
+    fromAddress  String? @map("from_address")
+    fromWalletId String? @map("from_wallet_id")
+
+    // Receiver
+    toAddress String @map("to_address")
+
+    // Relation
+    userId String @map("user_id")
+    user   User   @relation(fields: [userId], references: [id])
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("transactions")
+}
+
+enum TransactionStatus {
+    PENDING
+    COMPLETE
+    FAILED
+    CANCELLED
+}
+
+enum TransactionType {
+    SEND
+    RECEIVE
+}

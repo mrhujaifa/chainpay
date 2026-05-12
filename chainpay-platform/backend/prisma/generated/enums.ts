@@ -28,6 +28,24 @@ export const AuthProvider = {
 export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
 
 
+export const TransactionStatus = {
+  PENDING: 'PENDING',
+  COMPLETE: 'COMPLETE',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]
+
+
+export const TransactionType = {
+  SEND: 'SEND',
+  RECEIVE: 'RECEIVE'
+} as const
+
+export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+
+
 export const WalletType = {
   DEV_CONTROLLED: 'DEV_CONTROLLED',
   USER_CONTROLLED: 'USER_CONTROLLED'
