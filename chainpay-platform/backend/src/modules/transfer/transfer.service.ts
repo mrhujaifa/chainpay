@@ -3,7 +3,6 @@ import { AppError } from "../../utils/AppError";
 import { v4 as uuidv4 } from "uuid";
 import type { SendTransferInput } from "./transfer.validation";
 import { prisma } from "../../../lib/prisma";
-import { GetWalletSetsOrderEnum } from "@circle-fin/developer-controlled-wallets/dist/types/clients/developer-controlled-wallets";
 
 // ✅ Circle Sandbox Token Addresses
 const TOKEN_ADDRESSES: Record<string, Record<string, string>> = {
